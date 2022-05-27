@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  apiproject.lesson:
+    image: ${DOCKER_REGISTRY-}apiprojectlesson
+    environment:
+      - ConnectionString=Server=sql.data;User=sa;Password=Pass@word01;Database=UniversityDb;    
+    build:
+      context: .
+      dockerfile: ApiProject.Lesson/Dockerfile
+    depends_on:
+      - sql.data
+
+  sql.data:
+    image: mssql-linux # Nome della nova imagine
+    build:
+      context: ./Database
+      dockerfile: Dockerfile # il Dockerfile per le struzioni dell'immagine
+    ports:
+      - "5433:1433"          # Le porte per la comunicazione externa ed interna 
+    container_name: mssql-linux  #  il nome dare dare ai contenitori che verrano creati da questa Imagine 

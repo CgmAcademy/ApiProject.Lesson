@@ -1,0 +1,38 @@
+USE [UniversityDb]
+GO
+/****** Object:  Table [dbo].[Corso]    Script Date: 27/05/2022 02:19:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Corso](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NULL,
+	[DatePublished] [datetime2](7) NOT NULL,
+ CONSTRAINT [PK_Corso] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Studente]    Script Date: 27/05/2022 02:19:48 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Studente](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NULL,
+	[DatePublished] [datetime2](7) NOT NULL,
+	[CorsoId] [int] NULL,
+ CONSTRAINT [PK_Studente] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Studente]  WITH CHECK ADD  CONSTRAINT [FK_Studente_Corso_CorsoId] FOREIGN KEY([CorsoId])
+REFERENCES [dbo].[Corso] ([Id])
+GO
+ALTER TABLE [dbo].[Studente] CHECK CONSTRAINT [FK_Studente_Corso_CorsoId]
+GO
