@@ -28,7 +28,7 @@ namespace ApiProject.Lesson.Controllers
         private DatabaseCxt _context;
         private IOptions<AppSettings> _setting;
         public UniversityController(ILogger<UniversityController> logger, 
-            DatabaseCxt ctx,  IMapper mapper
+            DatabaseCxt ctx
 
             )
         {

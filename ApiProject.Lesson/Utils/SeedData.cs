@@ -12,11 +12,9 @@ namespace ApiProject.Lesson.Utils
     {
         public static async Task SeedDatabase(DatabaseCxt dbCtx)
         {           
-            using (dbCtx)
-            {
+          
                 Clear(dbCtx.Studente);
-                Clear(dbCtx.Corso);
-            }
+        
 
             Corso corso = new Corso()
                 {
@@ -26,16 +24,14 @@ namespace ApiProject.Lesson.Utils
                 };
             List<Studente> students = new List<Studente>()
             {
-                new Studente() { Name = "Bruno" },
-                new Studente() { Name = "Mario"},
-                new Studente() { Name = "Luca" },
-                new Studente() { Name = "Maria" }
+                new Studente() { Name = "Bruno", DatePublished = DateTime.Now },
+                new Studente() { Name = "Mario", DatePublished = DateTime.Now},
+                new Studente() { Name = "Luca", DatePublished = DateTime.Now },
+                new Studente() { Name = "Maria", DatePublished = DateTime.Now }
             };
 
             corso.Students.AddRange(students);
 
-            using (dbCtx)
-            {
                 dbCtx.Corso.Add(corso);
 
                 try
@@ -47,7 +43,7 @@ namespace ApiProject.Lesson.Utils
 
                     throw;
                 }
-            }
+            
         }
         public static void Clear<T>(this DbSet<T> dbSet) where T : class
         {

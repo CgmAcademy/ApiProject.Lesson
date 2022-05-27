@@ -84,7 +84,7 @@ namespace ApiProject.Lesson
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ApiProject.Lesson", Version = "v1" });
             });
-            services.AddAutoMapper(typeof(Startup));
+          //  services.AddAutoMapper(typeof(Startup));
 
         }
 
