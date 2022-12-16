@@ -9,11 +9,11 @@ namespace ApiProject.Lesson.Models.Communication
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }       
-        public  int CorsoId { get; set; }
+      //  public  int CorsoId { get; set; }
         public Studente ToStudent() => new Studente()
         {
             Name = this.Name,
-            CorsoId = this.CorsoId,
+          //  CorsoId = this.CorsoId,
 
         };
 

@@ -43,7 +43,7 @@ namespace ClientHttp.Lesson
         static async Task<Studente> UpdateStudenteAsync(int id, SaveStudenteResource studenteRsc)
         {
             HttpResponseMessage response = await client.PutAsJsonAsync(
-                $"api/University?id={id}", studenteRsc);
+                $"/api/University/Student/{id}", studenteRsc);
             response.EnsureSuccessStatusCode();
 
             // Deserialize the updated product from the response body.

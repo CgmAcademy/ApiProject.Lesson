@@ -16,12 +16,18 @@ namespace ApiProject.Lesson.Utils
                 Clear(dbCtx.Studente);
         
 
-            Corso corso = new Corso()
+            Corso Informatica = new Corso()
                 {
                     Name = "Informatica",
                     DatePublished = DateTime.Now,
                     Students = new List<Studente>()
                 };
+            Corso Lettere = new Corso()
+            {
+                Name = "Lettere",
+                DatePublished = DateTime.Now,
+                Students = null
+            };
             List<Studente> students = new List<Studente>()
             {
                 new Studente() { Name = "Bruno", DatePublished = DateTime.Now },
@@ -30,11 +36,12 @@ namespace ApiProject.Lesson.Utils
                 new Studente() { Name = "Maria", DatePublished = DateTime.Now }
             };
 
-            corso.Students.AddRange(students);
+            Informatica.Students.AddRange(students);
+            
+            dbCtx.Corso.Add(Informatica);
+            dbCtx.Corso.Add(Lettere);
 
-                dbCtx.Corso.Add(corso);
-
-                try
+            try
                 {
                     await  dbCtx.SaveChangesAsync();                    
                 }

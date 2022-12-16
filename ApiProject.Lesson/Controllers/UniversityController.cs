@@ -52,10 +52,10 @@ namespace ApiProject.Lesson.Controllers
             Corso c = null;
             using (_context)
             {
-                c = await  _context.Corso.Where(c => c.Name == Title).FirstAsync();
-                var data = _context.Corso
+               // c = await  _context.Corso.Where(c => c.Name == Title).FirstAsync();
+                var data = await _context.Corso.Where(c => c.Name == Title)
                .Include(s => s.Students)
-               .First(c => c.Id == c.Id);
+               .FirstAsync(c => c.Id == c.Id);
                 
                 return Ok(data);
             }
@@ -87,15 +87,15 @@ namespace ApiProject.Lesson.Controllers
         }
 
       
-        [HttpPost]
-        public IActionResult Post([FromBody] SaveStudenteResource value)
+        [HttpPost()]
+        public IActionResult Post([FromBody] SaveStudenteResource payload)
         {
             Studente result = null;
             try
             {
                 try
                 {
-                     result = _context.Studente.Add(value.ToStudent()).Entity;
+                     result = _context.Studente.Add(payload.ToStudent()).Entity;
                     _context.SaveChanges();
                     return Ok(result);
                 }
@@ -114,12 +114,14 @@ namespace ApiProject.Lesson.Controllers
            
         }
 
-       
-        [HttpPut]
-        public async Task<IActionResult> Put(int id,[FromBody] SaveStudenteResource payload)
+
+        [HttpPut("Student/{id}")]
+        public async Task<IActionResult> Put(int id, [FromBody] SaveStudenteResource payload)
         {
-            //var studentePayload = _mapper.Map<SaveStudenteResource, Studente>(payload);
+            //var studentePayload = _mapper.Map<SaveStudenteResource, Studente>(payload);  
+
             var std = await _context.Studente.FindAsync(id);
+           // var std = await _context.Studente.FindAsync(id);
             Studente stdRsrc = payload.ToStudent();
             std.Name = stdRsrc.Name;
             std.CorsoId = stdRsrc.CorsoId;  
